@@ -40,12 +40,13 @@ void readfile(String file)
 }
 WORD GetNextOpcode( )
 {
-    WORD res = 0 ;
-    res = memory[pc]; // in example res is 0xAB
-    res <<= 8 ; // shift 8 bits left. In our example res is 0xAB00
-    res |= m_GameMemory[m_ProgramCounter+1] ; //In example res is 0xABCD
-    m_ProgramCounter+=2 ;
-    return res ;
+    //opcode is 16 bits. Since memory is 8 bits, we shift it to the right by 8 bits and OR it with the next opcode
+    WORD code = 0 ;
+    code = memory[pc];                              //get the first opcode
+    code <<= 8 ;                                    //shift the first opcode 8 bits to the  left.
+    code |= memory[pc+1] ;                          //get the result by ORing current value of code with next opcode.
+    pc+=2 ;
+    return code;
 }
 //emulates one cycle.
 int emu() {
