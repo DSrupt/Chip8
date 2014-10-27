@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include<"chip8.cpp">
 using namespace std;
 // opcodes aka instructions
 // internal cpu memeory = register
@@ -10,6 +10,15 @@ using namespace std;
 
 */
 int main() {
+    chip8 chip;
+    chip.reset();
+    chip.readfile("~/PONG");
+    chip.reset();
+    //TODO Ask for file name
+    for(int i=0;i<4096;i+= sizeof(BYTE))
+    {
+        std::cout<< chip.memory[i];
+    }
     return 0;
 }
 

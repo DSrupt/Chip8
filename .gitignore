@@ -1,3 +1,6 @@
+*.properties
+*.log
+*.o
 *.class
 *.xml
 *.iml
