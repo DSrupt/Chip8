@@ -9,6 +9,7 @@
 #define	CHIP8_H
 typedef unsigned char BYTE;
 typedef unsigned short int WORD;
+
 class chip8{
 public:
     BYTE memory[4096];                  //4 KB memory
@@ -67,10 +68,10 @@ public:
     //emulates one cycle.
     int emu() {
         pc = 0x200;
-        opcode = memory[pc] << 8 | memory[pc + 1];  // get the opcode from memory
-        switch (opcode) {
-
-        }
+        opcode = GetNextOpcode();
+        DecodeOpcode(opcode);
+        // Redraw Graphics if flag is set
+        // check key input 
         return 0;
     }
 };
