@@ -20,6 +20,7 @@ public:
     BYTE display[64][32];               // Display
     BYTE opcode;                        // current opcode
     bool redraw;
+    
     void Redraw()
     {
         if(redraw)
