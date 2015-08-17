@@ -36,6 +36,15 @@ void chip8::readfile(std::string file)
     {
         switch (opcode & 0xf000)                        //opcode && 0xf000 gets the first digit of the opcode after "0x"
         {
+		// 
+		case 1: switch(opcode){
+			case 0x00E0: //clear display
+					break;
+			case 0x00EE: //return from subroutine.
+					pc = my_stack.pop();
+					break;
+			case 
+			}
             default: break;
         }
     }

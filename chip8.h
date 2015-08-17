@@ -14,7 +14,7 @@ typedef unsigned short int WORD;
 class chip8{
 public:
     BYTE memory[4096];                  //4 KB memory
-    BYTE v[16];                         //16 registers 8 bit each. Stores values from 00 to FF 
+    BYTE v[16];                         //16 registers
     std::stack<BYTE> my_stack;          //stack
     WORD pc;                            // program counter
     WORD R_I;                           // Address register I
