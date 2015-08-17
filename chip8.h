@@ -7,19 +7,20 @@
 
 #ifndef CHIP8_H
 #define	CHIP8_H
+
 typedef unsigned char BYTE;
 typedef unsigned short int WORD;
 
 class chip8{
 public:
     BYTE memory[4096];                  //4 KB memory
-    BYTE v[16];                         //16 registers
+    BYTE v[16];                         //16 registers 8 bit each. Stores values from 00 to FF 
     std::stack<BYTE> my_stack;          //stack
     WORD pc;                            // program counter
     WORD R_I;                           // Address register I
     BYTE display[64][32];               // Display
     BYTE opcode;                        // current opcode
-    bool redraw;
+    bool redraw; 			// If flag is set redraw
     
     void Redraw();
 
