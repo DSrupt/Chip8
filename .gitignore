@@ -1,3 +1,9 @@
+chip8
+*cmake
+bin/
+Chip8_Roms/
+CMakeFiles/
+Makefile
 .*
 !/.gitignore
 *.properties
