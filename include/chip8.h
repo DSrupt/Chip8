@@ -1,10 +1,12 @@
 #include<SDL.h>
 #include<stack>
+#include<iostream>
 
 class chip8{
+	public:
 	unsigned char Memory[4096];
 	unsigned char Reg[16];
-	unsigned char display[64*32];
+	unsigned char displayBuffer[64*32];
 	int PC;
 	int Index;
 	int Delay_timer, Sound_timer;
@@ -27,11 +29,17 @@ class chip8{
 	    0xF0, 0x80, 0xF0, 0x80, 0xF0, //E
 	    0xF0, 0x80, 0xF0, 0x80, 0x80  //F
 	};
-	bool draw;
-	
-	chip8();
+	bool draw, state;
+	int error;	
+	SDL_Surface *display;
+	SDL_Event event;
+
+	chip8(const std::string &file);
 	void init();
-	void read(std::string file);
+	void read(const std::string &file);
 	void reset();
+	void run();
 	void cycle();
+	void render();
+	void decode(int opcode);
 };
