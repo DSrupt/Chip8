@@ -8,8 +8,7 @@ find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIR})
 
 #target_link_libraries(chip8 ${SDL2_LIBRARY})
-
+include_directories("include")
 file(GLOB SOURCES "src/*cpp")
-file(GLOB HEADERS "include/*h")
-add_executable(chip8 ${SOURCES} ${HEADERS})
+add_executable(chip8 ${SOURCES})
 
