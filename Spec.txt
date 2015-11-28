@@ -1,0 +1,28 @@
+CPU:
+
+	4096bytes Memory
+	16 8bit Registers
+	16bit PC
+	16bit Index Reg
+	2 Timer registers
+	A Stack of size 16
+	draw flag
+
+	init()
+		reset registers
+		set PC to 0x200(512) // Start of most Chip8 programs
+		load fonts into memory from 0 to 80
+		setup SDL. Create window, renderer etc.
+		load rom and start emulation
+	cycle()
+		get opcode from opcode located at PC
+		Process opcode
+		increment PC by 2 bytes. Each opcode is 2bytes
+		decrement timers if necessary
+		play sound if timer==0
+		
+main:
+	check command line args
+	Create chip8 VM
+	pass filename to VM 
+	start emulation
