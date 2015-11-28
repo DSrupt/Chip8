@@ -1,3 +1,5 @@
+.*
+!/.gitignore
 *.properties
 *.log
 *.o
