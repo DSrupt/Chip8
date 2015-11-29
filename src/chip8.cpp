@@ -1,12 +1,11 @@
 #include<chip8.h>
 
 /*
-	TODO
-	file I/O
-	SDL setup/destroy
-	SDL keyboard input
-	SDL draw
-	decoder
+	TODO file I/O
+	TODO SDL setup/destroy
+	TODO SDL keyboard input
+	TODO SDL draw
+	TODO decoder
 */
 chip8::chip8(const std::string &file){
 	init();	
@@ -45,8 +44,9 @@ void chip8::run(){
 		// Get keyboard input
 		cycle();
 		render();
+		state = (error == 0);
 	}
-
+	//TODO error handling
 }
 void chip8::cycle(){
 		uint16_t opcode = Memory[PC]; 	//First 8bits	
@@ -69,8 +69,13 @@ void chip8::decode(uint16_t opcode){
 					case 0xEE:
 					{
 						//00EE return from subroutine call. 
-						PC = _stack.pop();
-						PC+=2;
+						if(!_stack.empty()){
+							PC = _stack.top();
+							_stack.pop();
+						}
+						else{
+							error = 1;
+						}
 					}
 					break;
 					case 0xE0:
@@ -95,7 +100,6 @@ void chip8::decode(uint16_t opcode){
 				// 2nnn Call subroutine at nnn.
 				_stack.push(PC);
 				PC = opcode & 0x0FFF;
-				PC+=2;
 			}
 			break;
 		case 3:
