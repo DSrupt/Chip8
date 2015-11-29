@@ -1,17 +1,18 @@
 #include<SDL.h>
 #include<stack>
 #include<cstdlib>
+#include<cstdint>
 #include<iostream>
 
 class chip8{
 	public:
-	unsigned char Memory[4096];
-	unsigned char Reg[16];
-	unsigned char displayBuffer[64*32];
-	int PC;
-	int Index;
-	int Delay_timer, Sound_timer;
-	std::stack<unsigned char> _stack;
+	uint8_t Memory[4096];
+	uint8_t Reg[16];
+	uint8_t displayBuffer[64*32];
+	uint16_t PC;
+	uint16_t Index;
+	uint8_t Delay_timer, Sound_timer;
+	std::stack<uint16_t> _stack;
 	unsigned char charset[80] = {
 	    0xF0 ,0x90, 0x90, 0x90, 0xF0, //0
 	    0x20, 0x60, 0x20, 0x20, 0x70, //1
@@ -31,7 +32,7 @@ class chip8{
 	    0xF0, 0x80, 0xF0, 0x80, 0x80  //F
 	};
 	bool draw, state;
-	int error;	
+	uint8_t error;	
 	SDL_Surface *display;
 	SDL_Event event;
 
@@ -42,5 +43,5 @@ class chip8{
 	void run();
 	void cycle();
 	void render();
-	void decode(int opcode);
+	void decode(uint16_t opcode);
 };
