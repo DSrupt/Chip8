@@ -6,6 +6,9 @@
 	TODO SDL keyboard input
 	TODO SDL draw
 	TODO decoder
+	TODO error handling
+	TODO look into std::fill
+	TODO implement timers
 */
 chip8::chip8(const std::string &file){
 	init();	
@@ -29,7 +32,6 @@ void chip8::read(const std::string &file){
 	//Check if file will fit in Memory
 }
 void chip8::reset(){
-	//TODO look into std::fill
 	memset(Reg, 0, sizeof(Reg)); 
 	memset(Memory, 0, sizeof(Memory));
 	memset(displayBuffer, 0, sizeof(displayBuffer));
@@ -46,7 +48,6 @@ void chip8::run(){
 		render();
 		state = (error == 0);
 	}
-	//TODO error handling
 }
 void chip8::cycle(){
 		uint16_t opcode = Memory[PC]; 	//First 8bits	
@@ -54,7 +55,6 @@ void chip8::cycle(){
 		opcode = opcode | Memory[PC+1]; //Get last 8bits
 		PC+=2;
 		decode(opcode);
-		//TODO implement timers
 }
 
 void chip8::decode(uint16_t opcode){
