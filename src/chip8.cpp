@@ -101,7 +101,7 @@ void chip8::decode(int opcode){
 		case 3:
 			{
 				// 3xKK Skip next instruction if Vx = kk.
-				if(Reg[(opcode>>8)&0xF]==(opcode&&0xFF)){
+				if(Reg[(opcode>>8) & 0xF]==(opcode & 0xFF)){
 					PC +=2;
 				}
 				PC+=2;
@@ -110,7 +110,7 @@ void chip8::decode(int opcode){
 		case 4:
 			{
 				// 4xKK Skip next instruction if Vx != kk
-				if(Reg[(opcode>>8)&0xF]!=(opcode&&0xFF)){
+				if(Reg[(opcode>>8) & 0xF]!=(opcode & 0xFF)){
 					PC +=2;
 				}
 				PC+=2;
@@ -141,9 +141,9 @@ void chip8::decode(int opcode){
 			break;
 		case 8:
 			{
+				int x = Reg[opcode>>8 & 0xF];
+				int y = Reg[opcode>>4 & 0xF];
 				switch(opcode & 0xF){
-					int x = Reg[opcode>>8 & 0xF];
-					int y = Reg[opcode>>4 & 0xF];
 					case 1:
 						{
 							//Vx=Vy
@@ -194,7 +194,7 @@ void chip8::decode(int opcode){
 						break;
 					case 6:
 						{
-							if(Reg[x] & 0x1 = 1){
+							if( (Reg[x] & 0x1) == 1){
 								Reg[0xF] = 1;
 							}
 							else{
@@ -249,13 +249,13 @@ void chip8::decode(int opcode){
 			break;
 		case 0xB:
 			{
-				PCv = (opcode & 0xFFF) + Reg[0];
+				PC = (opcode & 0xFFF) + Reg[0];
 				PC+=2;
 			}
 			break;
 		case 0xC:
 			{
-				Reg[x] = (rand() + 255) & (opcode & 0xFF);			
+				Reg[opcode>>8 & 0xF] = (rand() + 255) & (opcode & 0xFF);			
 				PC+=2;
 			}
 			break;
@@ -275,7 +275,7 @@ void chip8::decode(int opcode){
 			}
 			break;
 		default:
-
+			break;
 	}
 }
 
