@@ -48,14 +48,39 @@ void chip8::run(){
 
 }
 void chip8::cycle(){
-		unsigned char opcode = Memory[PC];	
+		unsigned char opcode = Memory[PC]; 	//First 8bits	
+		opcode = opcode<<8; 			// shift left by 8bits
+		opcode = opcode | Memory[PC+1]; 	//Get last 8bits
 		PC+=2;
 		decode(opcode);
 		//TODO implement timers
 }
 
 void chip8::decode(int opcode){
-	
+	switch(opcode>>12){
+		case 0: 
+			switch(opcode & 0xFF){ 
+				//Get last 8bits	
+				case 0xEE:
+					//0x00EE return from subroutine call. 
+					PC = _stack.pop();
+					break;
+				case 0xE0:
+					//0x00E0 clear display
+					memset(displayBuffer, 0, sizeof(displayBuffer));
+					break;			
+			}
+			break;
+		case 1:
+			// 0x1nnn Jump to nnn
+			PC = opcode & 0x0FFF;
+			break;
+		case 2:
+			// 0x2nnn Call subroutine at nnn.
+			_stack.push(PC);
+			PC = opcode & 0x0FFF;
+			break;
+	}
 }
 
 void chip8::render(){
