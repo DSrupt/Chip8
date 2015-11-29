@@ -1,6 +1,6 @@
 #include<SDL.h>
 #include<stack>
-#include<stdlib>
+#include<cstdlib>
 #include<iostream>
 
 class chip8{
