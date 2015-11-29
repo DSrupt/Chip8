@@ -58,6 +58,9 @@ void chip8::cycle(){
 }
 
 void chip8::decode(int opcode){
+	//Each opcode is 16bits
+	//Extracts the first four bits by shifting right by 12 bits
+	// 0xABCD >> 12 = 0xA
 	switch(opcode>>12){
 		case 0:
 			{ 
@@ -261,12 +264,12 @@ void chip8::decode(int opcode){
 				PC+=2;
 			}
 			break;
-		case E:
+		case 0xE:
 			{
 				PC+=2;
 			}
 			break;
-		case F:
+		case 0xF:
 			{
 				PC+=2;
 			}
