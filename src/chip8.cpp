@@ -34,7 +34,7 @@ void chip8::reset(){
 	memset(Reg, 0, sizeof(Reg)); 
 	memset(Memory, 0, sizeof(Memory));
 	memset(displayBuffer, 0, sizeof(displayBuffer));
-	_stack = std::stack<unsigned char>();
+	_stack = std::stack<uint16_t>();
 	//load charset
 	for(int i=0;i<80;i++){
 		Memory[i] = charset[i];
@@ -49,15 +49,15 @@ void chip8::run(){
 
 }
 void chip8::cycle(){
-		unsigned char opcode = Memory[PC]; 	//First 8bits	
-		opcode = opcode<<8; 			// shift left by 8bits
-		opcode = opcode | Memory[PC+1]; 	//Get last 8bits
+		uint16_t opcode = Memory[PC]; 	//First 8bits	
+		opcode = opcode<<8; 		// shift left by 8bits
+		opcode = opcode | Memory[PC+1]; //Get last 8bits
 		PC+=2;
 		decode(opcode);
 		//TODO implement timers
 }
 
-void chip8::decode(int opcode){
+void chip8::decode(uint16_t opcode){
 	//Each opcode is 16bits
 	//Extracts the first four bits by shifting right by 12 bits
 	// 0xABCD >> 12 = 0xA
