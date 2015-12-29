@@ -7,5 +7,5 @@ int main(int argc, char *argv[]){
 		std::cout <<"USAGE chip8 game.rom"<<std::endl;	
 		return 0;
 	}
-	chip8 CHIP8("asdada");
+	chip8 CHIP8(std::string(*(++argv)));
 }
